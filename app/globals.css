@@ -3,14 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: radial-gradient(circle, #dedeff, #999aff);
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: linear-gradient(
+      to left,
+      #dedeff,
+      #999aff 
+    );
+    --foreground: #ffff;
   }
 }
 
