@@ -1,3 +1,4 @@
+//prisma configuration and database schema
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,8 +12,6 @@ datasource db {
 model User {
   id       String    @id
   username String    @unique
-  email    String    @unique
-  password String
   thoughts Thought[] //array of thoughts
   likes  Like[]  //likes on others thoughts
 }
