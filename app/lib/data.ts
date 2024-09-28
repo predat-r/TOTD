@@ -1,6 +1,6 @@
 import { PrismaClient, Thought, User } from "@prisma/client";
 import { createUserInput, createThoughtInput, likeInput } from "./definitions";
-import { List } from "postcss/lib/list";
+
 
 //initializing the prisma client
 const prisma = new PrismaClient();
