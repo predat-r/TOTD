@@ -2,6 +2,7 @@
   "name": "totd",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,12 +10,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.20.0",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.16.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -22,6 +24,11 @@
     "postcss": "^8",
     "prisma": "^5.20.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  },
+  "prisma": {
+     "seed": "tsx prisma/seed.ts"
   }
 }

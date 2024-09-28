@@ -1,14 +1,38 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-j"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  email    String    @unique
+  password String
+  thoughts Thought[] //array of thoughts
+  likes  Like[]  //likes on others thoughts
+}
+
+//singular thought entity
+model Thought {
+  thoughtId Int      @id @default(autoincrement())
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int    //id of User that created this thought
+  likes    Like[]   //array of likes for this thought
+  createdAt DateTime @default(now())
+
+}
+//Likes on thoughts
+model Like {
+  id        Int      @id @default(autoincrement())
+  thoughtId Int    //thought on which this like was made
+  userId    Int     //user who made this like
+
+  thought   Thought  @relation(fields: [thoughtId], references: [thoughtId])
+  user      User     @relation(fields: [userId], references: [id])
 }
