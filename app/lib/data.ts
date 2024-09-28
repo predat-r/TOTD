@@ -19,7 +19,7 @@ export const createUser = async (
     });
     return newUser;
   } catch (e) {
-    console.error("unable to create user");
+    console.error("unable to create user", e);
     return null;
   }
 };
@@ -27,14 +27,14 @@ export const createUser = async (
 //function to delete a user entity
 export const deleteUser = async (userId: string): Promise<boolean> => {
   try {
-    const deleted = await prisma.user.delete({
+    await prisma.user.delete({
       where: {
         id: userId,
       },
     });
     return true;
   } catch (e) {
-    console.error("error deleting user");
+    console.error("error deleting user", e);
     return false;
   }
 };
@@ -42,14 +42,13 @@ export const deleteUser = async (userId: string): Promise<boolean> => {
 //function to create a thought
 //returns created thought if creation is successful
 export const createThought = async (
-  userId: string,
   thought: createThoughtInput
 ): Promise<Thought | null> => {
   try {
     const newThought = await prisma.thought.create({
       data: {
         content: thought.content,
-        authorId: userId,
+        authorId: thought.authorId,
       },
     });
     return newThought;
@@ -63,14 +62,32 @@ export const createThought = async (
 //returns true if successful, false if failed
 export const deleteThought = async (thoughtId: number): Promise<boolean> => {
   try {
-    const deleted = await prisma.thought.delete({
+    await prisma.thought.delete({
       where: {
         thoughtId: thoughtId,
       },
     });
     return true;
   } catch (e) {
-    console.error("unable to delete thought");
+    console.error("unable to delete thought", e);
     return false;
   }
 };
+
+//function to like a thought
+//returns a boolean
+export const likeThought = async (
+  userId: string,
+  thoughtId: number
+): Promise<boolean> => {
+  try {
+    await prisma.like.create({
+      data: { userId: userId, thoughtId: thoughtId },
+    });
+    return true;
+  } catch (e) {
+    console.error("unable to like thought at this time", e);
+    return false;
+  }
+};
+
