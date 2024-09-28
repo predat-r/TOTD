@@ -53,7 +53,7 @@ export const createThought = async (
     });
     return newThought;
   } catch (e) {
-    console.error("unable to create thought");
+    console.error("unable to create thought",e);
     return null;
   }
 };
