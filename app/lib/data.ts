@@ -1,5 +1,6 @@
 import { PrismaClient, Thought, User } from "@prisma/client";
-import { createUserInput, createThoughtInput } from "./definitions";
+import { createUserInput, createThoughtInput, likeInput } from "./definitions";
+import { List } from "postcss/lib/list";
 
 //initializing the prisma client
 const prisma = new PrismaClient();
@@ -53,7 +54,7 @@ export const createThought = async (
     });
     return newThought;
   } catch (e) {
-    console.error("unable to create thought",e);
+    console.error("unable to create thought", e);
     return null;
   }
 };
@@ -73,7 +74,25 @@ export const deleteThought = async (thoughtId: number): Promise<boolean> => {
     return false;
   }
 };
-
+//function to fetch all thoughts
+//accepts page number as input and returns 20 thoughts
+export const fetchThoughts = async (
+  pageNumber: number
+): Promise<Thought[] | null> => {
+  try {
+    const thoughts: Thought[] = await prisma.thought.findMany({
+      skip: (pageNumber - 1) * 20,
+      take: 20, //number of thoughts to display per page
+      orderBy: {
+        likeCount: "asc",
+      },
+    });
+    return thoughts;
+  } catch (e) {
+    console.error("unable to fetch thoughts at this time", e);
+    return null;
+  }
+};
 //function to like a thought
 //returns a boolean
 export const likeThought = async (
@@ -91,3 +110,27 @@ export const likeThought = async (
   }
 };
 
+//function to remove like from thought
+//returns a boolean
+export const removeLike = async (like: likeInput): Promise<boolean> => {
+  try {
+    const likeToDelete = await prisma.like.findFirst({
+      where: {
+        thoughtId: like.thoughtId,
+        userId: like.userId,
+      },
+    });
+    if (likeToDelete) {
+      await prisma.like.delete({
+        where: {
+          id: likeToDelete.id,
+        },
+      });
+      return true;
+    }
+    return false;
+  } catch (e) {
+    console.error("unable to remove like at this time", e);
+    return false;
+  }
+};

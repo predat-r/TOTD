@@ -22,8 +22,9 @@ model Thought {
   content   String
   authorId  String //id of User that created this thought
   likes     Like[] //array of likes for this thought
+  likeCount Int      @default(0) // Field to keep track of the number of likes
   createdAt DateTime @default(now())
-
+  
 
   //relation definition with user : 
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
