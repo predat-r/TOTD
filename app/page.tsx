@@ -1,12 +1,19 @@
+'use client';
 import Navbar from "@/components/Navbar";
 import Heading from "@/components/Heading";
-import React from "react";
+import Dropdown from "@/components/Dropdown";
+import React, { useState } from "react";
 const page = () => {
+  const [showdropdown,setShowdropdown] = useState(false);
+  const toggleDropdown = () =>{
+    setShowdropdown(!showdropdown);
+  }
   return (
-    <>
-      <Navbar />
+    <div className="relative">
+      <Navbar toggleDropdown={toggleDropdown} />
+      {showdropdown?<Dropdown />:null}
       <Heading/>
-    </>
+    </div>
   );
 };
 
