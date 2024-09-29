@@ -35,4 +35,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .gradient-text {
+    @apply font-bold bg-clip-text text-transparent; 
+    background-image: linear-gradient(90deg, #9CA4FF, #2D358E 50%, #1D225B); /* Custom CSS gradient */
+  }
 }
