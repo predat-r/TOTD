@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Heading from "@/components/Heading";
 import Dropdown from "@/components/Dropdown";
 import React, { useState } from "react";
-const page = () => {
+const Homepage = () => {
   const [showdropdown,setShowdropdown] = useState(false);
   const toggleDropdown = () =>{
     setShowdropdown(!showdropdown);
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Homepage;
