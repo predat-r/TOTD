@@ -3,25 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: radial-gradient(circle, #dedeff, #999aff);
+  --background: radial-gradient(circle, #999aff, #dedeff);
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: linear-gradient(
-      to left,
+      to bottom,
       #dedeff,
-      #999aff 
+      #999aff
     );
     --foreground: #ffff;
   }
+}
+
+html, body {
+  height: 100%; 
+  margin: 0;  
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;  
+  background-position: center;
+
 }
 
 @layer utilities {
