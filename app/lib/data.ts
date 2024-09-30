@@ -1,7 +1,6 @@
 import { PrismaClient, Thought, User } from "@prisma/client";
 import { createUserInput, createThoughtInput, likeInput } from "./definitions";
 
-
 //initializing the prisma client
 const prisma = new PrismaClient();
 
@@ -16,7 +15,7 @@ export const createUser = async (
       data: {
         id: user.id,
         username: user.username,
-        profilePicture:user.profilePicture||null,
+        profilePicture: user.profilePicture || null,
       },
     });
     return newUser;
