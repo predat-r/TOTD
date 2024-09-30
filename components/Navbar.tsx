@@ -6,11 +6,22 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import Image from "next/image";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import React from "react";
+import NotifsDropdown from "./NotifsDropdown";
 
 function Navbar() {
   const [showdropdown, setShowdropdown] = useState(false);
+  const [showNotifsDropdown, setShowNotifsDropdown] = useState(false);
   const toggleDropdown = () => {
     setShowdropdown(!showdropdown);
+    if (showNotifsDropdown) {
+      setShowNotifsDropdown(!showNotifsDropdown);
+    }
+  };
+  const toggleNotifsDropdown = () => {
+    setShowNotifsDropdown(!showNotifsDropdown);
+    if (showdropdown) {
+      setShowdropdown(!showdropdown);
+    }
   };
   return (
     <>
@@ -34,7 +45,10 @@ function Navbar() {
         </SignedOut>
         <SignedIn>
           <div className="flex flex-row justify-end items-center gap-x-6">
-            <IoMdNotificationsOutline size={30}  />
+            <IoMdNotificationsOutline
+              size={30}
+              onClick={() => toggleNotifsDropdown()}
+            />
             <div
               onClick={() => toggleDropdown()}
               className="bg-black w-12 h-12 rounded-full p-0 m-0 flex items-center justify-center overflow-hidden"
@@ -51,6 +65,7 @@ function Navbar() {
         </SignedIn>
       </nav>
       {showdropdown ? <Dropdown /> : null}
+      {showNotifsDropdown ? <NotifsDropdown /> : null}
     </>
   );
 }
