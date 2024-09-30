@@ -15,7 +15,7 @@ function Heading() {
       <SignedIn>
         <div className="flex justify-center items-center">
           <div className="w-2/3 ">
-            <p className="text-3xl text-gray-600 text-center mb-9">
+            <p className="text-3xl gradient-text text-center mb-9">
               Share what&apos;s on your mind. No censor. No persistence. All
               thoughts are wiped after 24hrs.
             </p>

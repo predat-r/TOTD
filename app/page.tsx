@@ -1,11 +1,10 @@
-import Navbar from "@/components/Navbar";
+
 import Heading from "@/components/Heading";
-import Cards from "@/components/Cards";
+import Cards from "@/components/CardContainer";
 
 const Homepage = () => {
   return (
     <div className="relative">
-      <Navbar />
       <Heading />
       <Cards />
     </div>

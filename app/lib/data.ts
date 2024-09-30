@@ -16,6 +16,7 @@ export const createUser = async (
       data: {
         id: user.id,
         username: user.username,
+        profilePicture:user.profilePicture,
       },
     });
     return newUser;

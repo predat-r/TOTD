@@ -1,26 +1,26 @@
 "use client";
 import Card from "./Card";
 import { formatLikes } from "@/app/lib/actions";
-const Cards = () => {
+const CardContainer = () => {
   // JSON data with cards
   const cardsData = [
     {
       id: 1,
       text: "Vote for Trump.",
       likes: 1700,
-      picture: "/path-to-image-1.jpg", 
+      picture: "/placeholder.jpg", 
     },
     {
       id: 2,
       text: "Support Climate Action.",
       likes: 1200,
-      picture: "/path-to-image-2.jpg",
+      picture: "/placeholder.jpg",
     },
     {
       id: 3,
       text: "Promote Peace.",
       likes: 950,
-      picture: "/path-to-image-3.jpg",
+      picture: "/placeholder.jpg",
     },
    
   ];
@@ -39,4 +39,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default CardContainer;

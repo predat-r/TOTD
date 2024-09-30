@@ -2,6 +2,7 @@
 export interface createUserInput {
   id: string;
   username: string;
+  profilePicture:string  //url to profile picture stored in cloudinary
 }
 
 export interface createThoughtInput {
