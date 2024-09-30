@@ -1,6 +1,6 @@
 "use client";
 import Card from "./Card";
-
+import { formatLikes } from "@/app/lib/actions";
 const Cards = () => {
   // JSON data with cards
   const cardsData = [
@@ -31,7 +31,7 @@ const Cards = () => {
         <Card
           key={card.id}
           text={card.text}
-          likes={card.likes}
+          likes={formatLikes(card.likes)}
           picture={card.picture}
         />
       ))}

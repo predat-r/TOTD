@@ -4,6 +4,7 @@ import { useState } from "react";
 import { TfiAlignLeft } from "react-icons/tfi";
 import Image from "next/image";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import React from "react";
 
 function Navbar() {
   const [showdropdown, setShowdropdown] = useState(false);
