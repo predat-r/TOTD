@@ -21,7 +21,7 @@ const Dropdown = () => {
         </SignUpButton>
       </SignedOut>
       <SignedIn>
-      <SignOutButton >
+      <SignOutButton>
           <button className="bg-[#3E0A9E]  hover:bg-[#5d1fcf] text-white font-bold py-2 px-4 w-24 md:w-32 rounded-lg">
             Sign Out
           </button>

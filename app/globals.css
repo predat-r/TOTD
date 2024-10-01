@@ -23,13 +23,15 @@ html, body {
   margin: 0;  
 }
 
+
 body {
   color: var(--foreground);
   background: var(--background);
-  background-size: cover;  
+  background-size: 200% 200%; /* Increased background size for movement */
   background-position: center;
-
+  animation: scrollGradient 10s linear infinite; /* Infinite scrolling */
 }
+
 
 @layer utilities {
   .text-balance {
@@ -38,5 +40,13 @@ body {
   .gradient-text {
     @apply font-bold bg-clip-text text-transparent; 
     background-image: linear-gradient(90deg, #9CA4FF, #2D358E 50%, #1D225B); /* Custom CSS gradient */
+  }
+}
+@keyframes scrollGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
   }
 }
