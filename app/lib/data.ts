@@ -134,3 +134,13 @@ export const removeLike = async (like: likeInput): Promise<boolean> => {
     return false;
   }
 };
+export const doesUserExist = async (userId:string):Promise<boolean>=>{
+
+  const user = await prisma.user.findFirst({where:{id:userId}});
+  if(user!==null){
+    console.log("user exists previously");
+    return true;
+  }
+  console.log("user doesnt exist");
+  return false;
+}
