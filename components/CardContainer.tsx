@@ -18,34 +18,42 @@ const CardContainer = () => {
     },
     {
       id: 3,
-      text: "Promote Peace.",
+      text: "Promote Peace and yes this is random text.",
       likes: 950,
       picture: "/placeholder.jpg",
     },
     {
-      id: 1,
+      id: 4,
       text: "Vote for Trump.",
       likes: 1700,
       picture: "/placeholder.jpg", 
     },
+    
     {
-      id: 2,
+      id: 9,
+      text: "Promote Peace and yes this is random text.",
+      likes: 950,
+      picture: "/placeholder.jpg",
+    },
+    {
+      id: 8,
       text: "Support Climate Action.",
       likes: 1200,
       picture: "/placeholder.jpg",
     },
     {
-      id: 3,
-      text: "Promote Peace.",
-      likes: 950,
-      picture: "/placeholder.jpg",
+      id: 10,
+      text: "Vote for Trump.",
+      likes: 1700,
+      picture: "/placeholder.jpg", 
     },
+    
    
   ];
 
   return (
     
-    <div className="flex flex-row gap-8 flex-wrap">
+    <div className="grid grid-cols-3 gap-2">
       {cardsData.map((card) => (
         <Card
           key={card.id}

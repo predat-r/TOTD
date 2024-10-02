@@ -1,6 +1,8 @@
-'use server';
+"use server";
 import { currentUser } from "@clerk/nextjs/server";
-async function UserActions() {
+async function UserActions(): Promise<
+  { userId: string; username: string } | undefined
+> {
   const user = await currentUser();
   if (!user) {
     console.error("User not logged in");
