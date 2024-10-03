@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/navigation";
 const Dropdown = () => {
   const router = useRouter();
-  const { isSignedIn, user } = useUser();
+  const { user } = useUser();
   const handleRedirect = () => {
     if (user) {
       router.push(`/user/${user.username}`);

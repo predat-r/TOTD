@@ -11,6 +11,7 @@ export async function GET(request: Request) {
     const thoughts = await fetchThoughts(pageNumber);
     return NextResponse.json(thoughts, { status: 200 });
   } catch (e) {
+    console.error(e);
     return NextResponse.json([], { status: 400 });
   }
 }
@@ -25,6 +26,7 @@ export async function POST(request: Request) {
     revalidatePath("/");
     return NextResponse.json(thought, { status: 201 });
   } catch (e) {
+    console.error(e);
     return NextResponse.json({ status: 400 });
   }
 }
