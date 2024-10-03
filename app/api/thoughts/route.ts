@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { fetchThoughts } from "../../lib/data";
 import { createThought } from "../../lib/data";
-import { revalidatePath } from "next/cache";
 //api to retrieve thoughts for homepage
 export async function GET(request: Request) {
   try {
