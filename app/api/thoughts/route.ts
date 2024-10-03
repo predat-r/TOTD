@@ -23,7 +23,6 @@ export async function POST(request: Request) {
       content: content,
       authorId: authorId,
     });
-    revalidatePath("/");
     return NextResponse.json(thought, { status: 201 });
   } catch (e) {
     console.error(e);
