@@ -3,8 +3,9 @@ import Cards from "@/components/CardContainer";
 import TopThought from "@/components/TopThought";
 import UserActions from "./lib/userActions";
 import { doesUserExist, createUser } from "./lib/data";
-import { Thought, User } from "./lib/definitions";
-export const revalidate = 2;
+import {  User } from "./lib/definitions";
+import React from "react";
+import CardContainer from "@/components/CardContainer";
 async function signupUser() {
   const user = await UserActions();
   if (user) {
@@ -19,16 +20,9 @@ async function signupUser() {
   }
 }
 const Homepage = async () => {
+  console.log("started sign up ... ");
   await signupUser();
-
-  const response = await fetch(
-    "http://localhost:3000/api/thoughts?pageNumber=1",
-    {
-      method: "GET",
-      cache: "no-store",
-    }
-  );
-  const thoughts:Thought[] = await response.json();
+  console.log("finished singup check...");
 
   return (
     <div className="relative">
@@ -38,7 +32,7 @@ const Homepage = async () => {
         likes={"1.2k"}
         picture="/placeholder.jpg"
       />
-      <Cards thoughts={thoughts} />
+      <CardContainer  />
     </div>
   );
 };
