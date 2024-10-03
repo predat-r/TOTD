@@ -1,5 +1,4 @@
 import Heading from "@/components/Heading";
-import Cards from "@/components/CardContainer";
 import TopThought from "@/components/TopThought";
 import UserActions from "./lib/userActions";
 import { doesUserExist, createUser } from "./lib/data";
