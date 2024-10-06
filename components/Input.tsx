@@ -11,8 +11,6 @@ const Input = () => {
   }
   const { user } = useUser();
   async function handleCreate() {
-    //getting user id to create the thought with
-
     if (user) {
       if (input !== "") {
         const content = input;

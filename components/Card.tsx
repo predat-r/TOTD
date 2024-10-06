@@ -14,11 +14,9 @@ type CardProps = {
 };
 
 const Card = ({ id, text, likes, picture }: CardProps) => {
-  const { isSignedIn } = useSession();
-  const { user } = useUser();
+  const { isSignedIn, user } = useUser();
   const [likedbyuser, setLikedbyuser] = useState(false);
   const [likecount, setLikeCount] = useState(parseInt(likes));
-
   useEffect(() => {
     const likedbyCurrentUser = async () => {
       if (isSignedIn) {
@@ -36,7 +34,6 @@ const Card = ({ id, text, likes, picture }: CardProps) => {
         }
       }
     };
-
     likedbyCurrentUser();
   }, [isSignedIn, user, id]);
 
@@ -89,7 +86,6 @@ const Card = ({ id, text, likes, picture }: CardProps) => {
           </SignInButton>
         )}
         <p className="text-gray-500">{formatLikes(likecount)}</p>{" "}
-        {/* Ensure like count is formatted */}
       </div>
     </div>
   );
