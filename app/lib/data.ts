@@ -1,4 +1,4 @@
-import { Like, PrismaClient, Thought } from "@prisma/client";
+import {  PrismaClient, Thought } from "@prisma/client";
 import { createThoughtInput, likeInput } from "./definitions";
 
 //initializing the prisma client

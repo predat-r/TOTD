@@ -1,7 +1,7 @@
 "use client";
 import { FaHeart } from "react-icons/fa";
 import Image from "next/image";
-import { useSession, useUser } from "@clerk/nextjs";
+import {  useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { formatLikes } from "@/app/lib/actions";
 import { SignInButton } from "@clerk/nextjs";
