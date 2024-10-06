@@ -7,7 +7,7 @@ import UserProfileHeading from "@/components/UserProfileHeading";
 const ProfilePage = () => {
   return (
     <div className=" flex flex-col overflow-scroll items-center w-full h-full">
-    <UserProfileHeading></UserProfileHeading>
+      <UserProfileHeading></UserProfileHeading>
       <div className="flex flex-row justify-center items-center rounded-full w-60 h-60 overflow-hidden mt-5">
         <Image
           src={"/placeholder.jpg"}
@@ -27,6 +27,7 @@ const ProfilePage = () => {
         <h1 className="gradient-text text-5xl p-2">Live Thoughts</h1>
         <div className="w-full flex flex-row items-center justify-center gap-x-2">
           <Card
+            id={1}
             text="hey this is your live thought"
             likes="50"
             picture="/placeholder.jpg"
