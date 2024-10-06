@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 
-
 const Input = () => {
   const [input, setInput] = useState("");
   function handleChange(s: string) {
@@ -13,27 +12,31 @@ const Input = () => {
   const { user } = useUser();
   async function handleCreate() {
     //getting user id to create the thought with
-    if (user) {
-      const content = input;
-      const authorId = user.id;
-      //sending api call to create thought
-      const response = await fetch(
-        "http://localhost:3000/api/thoughts?pageNumber=1",
-        {
-          method: "POST",
-          body: JSON.stringify({ content, authorId }),
-          "cache":"no-store",
-        }
-      );
 
-      if (!response.ok) {
-        console.error("Failed to create thought");
+    if (user) {
+      if (input !== "") {
+        const content = input;
+        const authorId = user.id;
+        //sending api call to create thought
+        const response = await fetch(
+          "http://localhost:3000/api/thoughts?pageNumber=1",
+          {
+            method: "POST",
+            body: JSON.stringify({ content, authorId }),
+            cache: "no-store",
+          }
+        );
+
+        if (!response.ok) {
+          console.error("Failed to create thought");
+        } else {
+          console.log("created thought successfully");
+        }
       } else {
-        console.log("created thought successfully");
+        alert("cannot create empty thought");
+        console.log("cannot create empty thought");
       }
     }
- 
-
   }
   return (
     <div className="flex w-full flex-col items-center mb-6 ">

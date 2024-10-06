@@ -1,9 +1,8 @@
-import { PrismaClient, Thought} from "@prisma/client";
-import {createThoughtInput, likeInput } from "./definitions";
+import { Like, PrismaClient, Thought } from "@prisma/client";
+import { createThoughtInput, likeInput } from "./definitions";
 
 //initializing the prisma client
 const prisma = new PrismaClient();
-
 
 //function to create a thought
 //returns created thought if creation is successful
@@ -68,13 +67,22 @@ export const likeThought = async (
     await prisma.like.create({
       data: { userId: userId, thoughtId: thoughtId },
     });
+    await prisma.thought.update({
+      where: {
+        thoughtId: thoughtId,
+      },
+      data: {
+        likeCount: {
+          increment: 1,
+        },
+      },
+    });
     return true;
   } catch (e) {
     console.error("unable to like thought at this time", e);
     return false;
   }
 };
-
 //function to remove like from thought
 //returns a boolean
 export const removeLike = async (like: likeInput): Promise<boolean> => {
@@ -97,5 +105,22 @@ export const removeLike = async (like: likeInput): Promise<boolean> => {
   } catch (e) {
     console.error("unable to remove like at this time", e);
     return false;
+  }
+};
+//check if liked by a current user
+export const likedbyuser = async (
+  userId: string,
+  thoughtId: number
+): Promise<boolean> => {
+  const like = await prisma.like.findFirst({
+    where: {
+      thoughtId: thoughtId,
+      userId: userId,
+    },
+  });
+  if (like === null) {
+    return false;
+  } else {
+    return true;
   }
 };
