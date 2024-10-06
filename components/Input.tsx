@@ -16,14 +16,11 @@ const Input = () => {
         const content = input;
         const authorId = user.id;
         //sending api call to create thought
-        const response = await fetch(
-          "http://localhost:3000/api/thoughts?pageNumber=1",
-          {
-            method: "POST",
-            body: JSON.stringify({ content, authorId }),
-            cache: "no-store",
-          }
-        );
+        const response = await fetch(`/api/thoughts?pageNumber=1`, {
+          method: "POST",
+          body: JSON.stringify({ content, authorId }),
+          cache: "no-store",
+        });
 
         if (!response.ok) {
           console.error("Failed to create thought");

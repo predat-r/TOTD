@@ -1,7 +1,7 @@
 "use client";
 import { FaHeart } from "react-icons/fa";
 import Image from "next/image";
-import {  useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { formatLikes } from "@/app/lib/actions";
 import { SignInButton } from "@clerk/nextjs";
@@ -21,13 +21,10 @@ const Card = ({ id, text, likes, picture }: CardProps) => {
     const likedbyCurrentUser = async () => {
       if (isSignedIn) {
         const userId = user?.id;
-        const response = await fetch(
-          "http://localhost:3000/api/like/likedbyuser",
-          {
-            method: "POST",
-            body: JSON.stringify({ userId, thoughtId: id }),
-          }
-        );
+        const response = await fetch(`/api/like/likedbyuser`, {
+          method: "POST",
+          body: JSON.stringify({ userId, thoughtId: id }),
+        });
         const data = await response.json();
         if (data === true) {
           setLikedbyuser(true);
@@ -41,7 +38,7 @@ const Card = ({ id, text, likes, picture }: CardProps) => {
     if (user !== null) {
       setLikedbyuser(true);
       const userId = user?.id;
-      await fetch("http://localhost:3000/api/like", {
+      await fetch(`/api/like`, {
         method: "POST",
         body: JSON.stringify({
           thoughtId,
