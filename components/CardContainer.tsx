@@ -1,9 +1,10 @@
-
+import { unstable_noStore as noStore} from "next/cache";
 import Card from "./Card";
 import { formatLikes } from "@/app/lib/actions";
 import { Thought } from "@/app/lib/definitions";
 import { fetchThoughts } from "@/app/lib/actions";
 const CardContainer = async () => {
+  noStore()
   const thoughts: Thought[] = await fetchThoughts();
   return (
     <div className="grid grid-cols-3 gap-2">

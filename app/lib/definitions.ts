@@ -20,8 +20,3 @@ export interface Thought {
   authorId: string;
   likeCount: number;
 }
-export interface User {
-  id: string;
-  username: string;
-  profilePicture: string | null;
-}

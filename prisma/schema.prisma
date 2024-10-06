@@ -9,37 +9,22 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model User {
-  id       String    @id
-  username String    @unique
-  profilePicture String?
-  thoughts Thought[] //array of thoughts
-  likes    Like[] //likes on others thoughts
-
-}
-
 //singular thought entity
 model Thought {
   thoughtId Int      @id @default(autoincrement())
   content   String
-  authorId  String //id of User that created this thought
+  authorId  String //id of User that created this thought will come from clerk
   likes     Like[] //array of likes for this thought
   likeCount Int      @default(0) // Field to keep track of the number of likes
   createdAt DateTime @default(now())
-  
-
-  //relation definition with user : 
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
 
 //Likes on thoughts
 model Like {
   id        Int    @id @default(autoincrement())
   thoughtId Int //thought on which this like was made
-  userId    String //user who made this like
+  userId    String //user who made this like will come from clerk 
 
-
-  //relation definition with thought and user :
+  //relation definition with thought
   thought Thought @relation(fields: [thoughtId], references: [thoughtId], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

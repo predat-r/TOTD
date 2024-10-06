@@ -22,6 +22,7 @@ const Input = () => {
         {
           method: "POST",
           body: JSON.stringify({ content, authorId }),
+          "cache":"no-store",
         }
       );
 

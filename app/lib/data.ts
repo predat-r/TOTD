@@ -1,44 +1,9 @@
-import { PrismaClient, Thought, User } from "@prisma/client";
-import { createUserInput, createThoughtInput, likeInput } from "./definitions";
+import { PrismaClient, Thought} from "@prisma/client";
+import {createThoughtInput, likeInput } from "./definitions";
 
 //initializing the prisma client
 const prisma = new PrismaClient();
 
-//function to create a user entity
-//returns User object if created successfully
-
-export const createUser = async (
-  user: createUserInput
-): Promise<User | null> => {
-  try {
-    const newUser = await prisma.user.create({
-      data: {
-        id: user.id,
-        username: user.username,
-        profilePicture: user.profilePicture || null,
-      },
-    });
-    return newUser;
-  } catch (e) {
-    console.error("unable to create user", e);
-    return null;
-  }
-};
-
-//function to delete a user entity
-export const deleteUser = async (userId: string): Promise<boolean> => {
-  try {
-    await prisma.user.delete({
-      where: {
-        id: userId,
-      },
-    });
-    return true;
-  } catch (e) {
-    console.error("error deleting user", e);
-    return false;
-  }
-};
 
 //function to create a thought
 //returns created thought if creation is successful
@@ -134,13 +99,3 @@ export const removeLike = async (like: likeInput): Promise<boolean> => {
     return false;
   }
 };
-export const doesUserExist = async (userId:string):Promise<boolean>=>{
-
-  const user = await prisma.user.findFirst({where:{id:userId}});
-  if(user!==null){
-    console.log("user exists previously");
-    return true;
-  }
-  console.log("user doesnt exist");
-  return false;
-}
