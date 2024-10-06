@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import {  likeThought } from "@/app/lib/data";
+import { likeThought } from "@/app/lib/data";
 export async function POST(req: Request) {
   const { userId, thoughtId } = await req.json();
   try {
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json(false, { status: 400 });
     }
   } catch (e) {
-    return NextResponse.json(false, { status: 400 });
     console.error(e);
+    return NextResponse.json(false, { status: 500 });
   }
 }
