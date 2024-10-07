@@ -3,9 +3,8 @@ import Image from "next/image";
 import Input from "@/components/Input";
 async function page() {
   const user = await currentUser();
-  const fullName = user?.fullName;
+  const fullName = user?.username;
   const image = user?.imageUrl;
-
   return (
     <div className="flex flex-col items-center justify-center mt-[-20px]">
       <div className="text-5xl mb-4">{fullName}</div>

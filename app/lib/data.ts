@@ -58,6 +58,23 @@ export const fetchThoughts = async (
     return null;
   }
 };
+
+//fetch thougths of a particular author
+export const fetchUserThoughts = async (
+  userId: string
+): Promise<Thought[] | null> => {
+  try {
+    const thoughts = await prisma.thought.findMany({
+      where: {
+        authorId: userId,
+      },
+    });
+    return thoughts;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+};
 //function to like a thought
 //returns a boolean
 export const likeThought = async (
