@@ -15,7 +15,7 @@ const Dropdown = () => {
   const { user } = useUser();
   const handleRedirect = () => {
     if (user && page === "home") {
-      router.push(`/user`);
+      router.push(`/user/${user.username}`);
     }
     else{
       router.push("/");

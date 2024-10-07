@@ -18,14 +18,13 @@ async function page() {
           />
         </div>
       )}
-      <p className="mt-4 text-lg">
-        Release your
-        <span className="text-indigo-600 font-bold">Controversial</span>,{" "}
-        <span className="text-red-600 font-bold">Political</span> or{" "}
-        <span className="text-blue-600 font-bold">Random</span> thoughts with
-        the world. Uncensored.
-      </p>
-      <Input/>
+      <h1 className="mt-10 text-2xl text-black font-semibold">
+        Release your <span className="text-blue-600">controversial</span>,
+        <span className="text-purple-600"> political</span> or{" "}
+        <span className="text-cyan-600">random</span> thoughts to the world.
+        Uncensored.
+      </h1>
+      <Input />
     </div>
   );
 }
