@@ -1,10 +1,9 @@
-import React from "react";
 import Image from "next/image";
 import Input from "@/components/Input";
-import Card from "@/components/Card";
 import UserProfileHeading from "@/components/UserProfileHeading";
-
-const ProfilePage = () => {
+import ProfilePageThoughts from "@/components/profilePageThoughts";
+const ProfilePage = ({ params }: { params: { username: string } }) => {
+  const username = params.username;
   return (
     <div className=" flex flex-col overflow-scroll items-center w-full h-full">
       <UserProfileHeading></UserProfileHeading>
@@ -23,17 +22,9 @@ const ProfilePage = () => {
         Uncensored.
       </h1>
       <Input></Input>
+      <ProfilePageThoughts username={username} />
       <div className="mt-5 w-full bg-blue flex flex-col gap-y-10 items-center">
         <h1 className="gradient-text text-5xl p-2">Live Thoughts</h1>
-        <div className="w-full flex flex-row items-center  justify-center">
-          <Card
-            id={1}
-            text="hey this is your live thought yummy"
-            likes="50"
-            picture="/placeholder.jpg"
-          ></Card>
-          <h1 className="gradient-text text-3xl p-2">24:09 left</h1>
-        </div>
       </div>
     </div>
   );
