@@ -1,14 +1,16 @@
 "use client";
 import { FaHeart } from "react-icons/fa";
 import Image from "next/image";
+import LikeButton from "./likeButton";
 
 type TopThoughtProps = {
+  id: number;
   text: string;
   likes: string;
   picture: string;
 };
 
-const TopThought = ({ text, likes, picture }: TopThoughtProps) => {
+const TopThought = ({ id, text, likes, picture }: TopThoughtProps) => {
   return (
     <div className="h-[15vh] relative flex  justify-center items-center pt-2 sm:pt-4">
       <Image
@@ -31,11 +33,7 @@ const TopThought = ({ text, likes, picture }: TopThoughtProps) => {
           </div>
           <p className="ml-4 text-lg font-semibold text-gray-700">{text}</p>
         </div>
-
-        <div className="flex items-center space-x-2">
-          <FaHeart className="text-gray-400 text-2xl hover:text-red-500 cursor-pointer" />
-          <p className="text-gray-500">{likes}</p>
-        </div>
+        <LikeButton id={id} likeCount={likes}></LikeButton>
       </div>
     </div>
   );

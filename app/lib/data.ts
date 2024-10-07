@@ -48,7 +48,7 @@ export const fetchThoughts = async (
       skip: (pageNumber - 1) * 20,
       take: 20, //number of thoughts to display per page
       orderBy: {
-        likeCount: "asc",
+        likeCount: "desc",
       },
     });
     return thoughts;
