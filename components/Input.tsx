@@ -4,11 +4,10 @@ import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { jelly } from "ldrs";
-
+import React from "react";
+import Loader from "./loader";
 const Input = () => {
   const router = useRouter();
-  jelly.register();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   function handleChange(s: string) {
@@ -68,7 +67,7 @@ const Input = () => {
         </div>
         <button className="bg-[#f0f4ff] h-[10vh] w-[7vw] p-3 rounded-2xl flex flex-row items-center justify-center  hover:bg-[#e0e4ff] shadow-elevateLow">
           {loading ? (
-            <l-jelly size="40" speed="0.9" color="#5762DA"></l-jelly>
+            <Loader />
           ) : (
             <IoMdCheckmarkCircleOutline
               size={45}
