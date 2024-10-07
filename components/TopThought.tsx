@@ -1,5 +1,4 @@
 "use client";
-import { FaHeart } from "react-icons/fa";
 import Image from "next/image";
 import LikeButton from "./likeButton";
 

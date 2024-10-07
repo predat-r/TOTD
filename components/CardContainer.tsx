@@ -3,7 +3,7 @@ import { formatLikes } from "@/app/lib/actions";
 import { fetchThoughts } from "@/app/lib/data";
 import { Thought } from "@/app/lib/definitions";
 const CardContainer = async () => {
-  let thoughts: Thought[] | null = await fetchThoughts(1);
+  const thoughts: Thought[] | null = await fetchThoughts(1);
   return (
     <div className="grid grid-cols-3 gap-2">
       {thoughts
