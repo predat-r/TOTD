@@ -1,4 +1,5 @@
-import {  PrismaClient, Thought } from "@prisma/client";
+"use server";
+import { PrismaClient, Thought } from "@prisma/client";
 import { createThoughtInput, likeInput } from "./definitions";
 
 //initializing the prisma client
@@ -108,19 +109,16 @@ export const removeLike = async (like: likeInput): Promise<boolean> => {
   }
 };
 //check if liked by a current user
-export const likedbyuser = async (
+export const likedByUser = async (
   userId: string,
   thoughtId: number
 ): Promise<boolean> => {
-  const like = await prisma.like.findFirst({
+  const count = await prisma.like.count({
     where: {
       thoughtId: thoughtId,
       userId: userId,
     },
   });
-  if (like === null) {
-    return false;
-  } else {
-    return true;
-  }
+
+  return count > 0;
 };

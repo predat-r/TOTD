@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import Loader from "./loader";
+import { createThought } from "@/app/lib/data";
 const Input = () => {
   const router = useRouter();
   const [input, setInput] = useState("");
@@ -14,19 +15,15 @@ const Input = () => {
     setInput(s);
   }
   const { user } = useUser();
+  //calls server action to create a thought
   async function handleCreate() {
     setLoading(true);
     if (user) {
       if (input !== "") {
         const content = input;
         const authorId = user.id;
-        //sending api call to create thought
-        const response = await fetch(`/api/thoughts?pageNumber=1`, {
-          method: "POST",
-          body: JSON.stringify({ content, authorId }),
-          cache: "no-store",
-        });
-        if (!response.ok) {
+        const response = await createThought({ content, authorId });
+        if (response === null) {
           console.error("Failed to create thought");
         } else {
           router.refresh();

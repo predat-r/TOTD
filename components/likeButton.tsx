@@ -1,63 +1,68 @@
+"use client";
+
 import { formatLikes } from "@/app/lib/actions";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import { likeThought, likedByUser } from "@/app/lib/data";
 
-const LikeButton = ({ id, likeCount }: { id: number; likeCount: string }) => {
+const LikeButton = ({
+  id,
+  likeCount: initialLikeCount,
+}: {
+  id: number;
+  likeCount: string;
+}) => {
   const { isSignedIn, user } = useUser();
-  const [likedbyuser, setLikedbyuser] = useState(false);
-  const [likecount, setLikeCount] = useState(parseInt(likeCount));
+  const [likedByCurrentUser, setLikedByCurrentUser] = useState(false);
+  const [likeCount, setLikeCount] = useState(parseInt(initialLikeCount));
+
+  //will run once on mount
   useEffect(() => {
-    const likedbyCurrentUser = async () => {
-      if (isSignedIn) {
-        const userId = user?.id;
-        const response = await fetch(`/api/like/likedbyuser`, {
-          method: "POST",
-          body: JSON.stringify({ userId, thoughtId: id }),
-        });
-        const data = await response.json();
-        if (data === true) {
-          setLikedbyuser(true);
+    const checkLikedByCurrentUser = async () => {
+      if (isSignedIn && user?.id) {
+        try {
+          const response = await likedByUser(user.id, id);
+          setLikedByCurrentUser(response);
+        } catch (error) {
+          console.error("Error checking if liked by user:", error);
         }
       }
     };
-    likedbyCurrentUser();
+    checkLikedByCurrentUser();
   }, [isSignedIn, user, id]);
 
-  const likeThought = async (thoughtId: number) => {
-    if (user !== null) {
-      setLikedbyuser(true);
+  const likeThoughtWithServerAction = async () => {
+    if (user?.id) {
+      setLikedByCurrentUser(true);
       setLikeCount((prev) => prev + 1);
-      const userId = user?.id;
-      await fetch(`/api/like`, {
-        method: "POST",
-        body: JSON.stringify({
-          thoughtId,
-          userId,
-        }),
-      });
+      try {
+        await likeThought(user.id, id);
+      } catch (error) {
+        console.error("Error liking thought:", error);
+        setLikedByCurrentUser(false);
+        setLikeCount((prev) => prev - 1);
+      }
     }
   };
+
   return (
     <div className="flex flex-row gap-x-2">
       {isSignedIn ? (
-        likedbyuser ? (
+        likedByCurrentUser ? (
           <FaHeart className="text-2xl text-red-500 cursor-pointer" />
         ) : (
           <FaHeart
-            onClick={() => likeThought(id)}
+            onClick={likeThoughtWithServerAction}
             className="text-gray-400 text-2xl hover:text-red-500 cursor-pointer"
           />
         )
       ) : (
         <SignInButton>
-          <FaHeart
-            onClick={() => likeThought(id)}
-            className="text-gray-400 text-2xl hover:text-red-500 cursor-pointer"
-          />
+          <FaHeart className="text-gray-400 text-2xl hover:text-red-500 cursor-pointer" />
         </SignInButton>
       )}
-      <p className="text-gray-500">{formatLikes(likecount)}</p>{" "}
+      <p className="text-gray-500">{formatLikes(likeCount)}</p>
     </div>
   );
 };
