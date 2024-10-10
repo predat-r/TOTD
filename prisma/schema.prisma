@@ -14,6 +14,7 @@ model Thought {
   thoughtId Int      @id @default(autoincrement())
   content   String
   authorId  String //id of User that created this thought will come from clerk
+  authorUsername String //username of user that created this thought
   likes     Like[] //array of likes for this thought
   likeCount Int      @default(0) // Field to keep track of the number of likes
   createdAt DateTime @default(now())

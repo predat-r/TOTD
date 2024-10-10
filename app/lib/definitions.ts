@@ -8,6 +8,7 @@ export interface createUserInput {
 export interface createThoughtInput {
   content: string;
   authorId: string;
+  authorUsername :string
 }
 //used for both add and remove like
 export interface likeInput {

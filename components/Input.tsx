@@ -22,7 +22,12 @@ const Input = () => {
       if (input !== "") {
         const content = input;
         const authorId = user.id;
-        const response = await createThought({ content, authorId });
+        const authorUsername = user.username ? user.username : "";
+        const response = await createThought({
+          content,
+          authorId,
+          authorUsername,
+        });
         if (response === null) {
           console.error("Failed to create thought");
         } else {

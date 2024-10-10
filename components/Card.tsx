@@ -12,7 +12,7 @@ type CardProps = {
 
 const Card = ({ id, text, likes, picture }: CardProps) => {
   return (
-    <div className="bg-[#f0f4ff] max-w-lg p-4 rounded-2xl shadow-elevateLow flex items-center justify-between">
+    <div className="bg-[#f0f4ff] max-w-lg flex-shrink-0 p-4 rounded-2xl shadow-elevateLow flex items-center justify-between">
       <div className="flex items-center">
         <div className="w-12 h-12 overflow-hidden rounded-full">
           <Image

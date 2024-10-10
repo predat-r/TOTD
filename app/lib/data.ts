@@ -15,6 +15,7 @@ export const createThought = async (
       data: {
         content: thought.content,
         authorId: thought.authorId,
+        authorUsername:thought.authorUsername
       },
     });
     return newThought;
@@ -61,12 +62,12 @@ export const fetchThoughts = async (
 
 //fetch thougths of a particular author
 export const fetchUserThoughts = async (
-  userId: string
+  username: string
 ): Promise<Thought[] | null> => {
   try {
     const thoughts = await prisma.thought.findMany({
       where: {
-        authorId: userId,
+        authorUsername: username,
       },
     });
     return thoughts;
