@@ -7,8 +7,14 @@ import Image from "next/image";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import React from "react";
 import NotifsDropdown from "./NotifsDropdown";
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { useRouter } from "next/navigation";
 
-function Navbar() {
+type NavbarProps = {
+  profilePicture?: string;
+};
+
+function Navbar({ profilePicture }: NavbarProps) {
   const [showdropdown, setShowdropdown] = useState(false);
   const [showNotifsDropdown, setShowNotifsDropdown] = useState(false);
   const toggleDropdown = () => {
@@ -23,6 +29,10 @@ function Navbar() {
       setShowdropdown(!showdropdown);
     }
   };
+
+  const router = useRouter();
+
+  const defaultProfilePicture = "/placeholder.jpg";
   return (
     <>
       <nav className="flex items-center justify-between bg-[#5762DA] p-4 relative rounded-xl mb-20 shadow-elevateLow">
@@ -31,7 +41,7 @@ function Navbar() {
         </div>
 
         <div className="text-white font-semibold ml-10 sm:ml-20">
-          <Image width={42} height={42} src="/icon.png" alt="logo" />
+          <Image className="hover:cursor-pointer" onClick={() => router.push('/')} width={42} height={42} src="/icon.png" alt="logo" />
         </div>
         <SignedOut>
           <div>
@@ -53,13 +63,9 @@ function Navbar() {
               onClick={() => toggleDropdown()}
               className="bg-black w-12 h-12 rounded-full p-0 m-0 flex items-center justify-center overflow-hidden"
             >
-              <Image
-                className="m-0"
-                height={40}
-                width={50}
-                src="/placeholder.jpg"
-                alt="profile picture"
-              ></Image>
+              <Avatar className="h-12 w-12">
+                <AvatarImage src={profilePicture || defaultProfilePicture} />
+              </Avatar>
             </div>
           </div>
         </SignedIn>
