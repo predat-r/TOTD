@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: radial-gradient(circle, #999aff, #dedeff);
+  --foreground: #171717;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: linear-gradient(
+      to bottom,
+      #dedeff,
+      #999aff
+    );
+    --foreground: #ffff;
+  }
+}
+
+
 html, body {
   height: 100%; 
   margin: 0;  
@@ -9,6 +25,8 @@ html, body {
 
 
 body {
+  color: var(--foreground);
+  background: var(--background);
   background-size: 200% 200%; /* Increased background size for movement */
   background-position: center;
   animation: scrollGradient 10s linear infinite; /* Infinite scrolling */
