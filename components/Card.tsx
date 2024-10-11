@@ -8,11 +8,12 @@ type CardProps = {
   text: string;
   likes: string;
   picture: string;
+  index: number;
 };
 
-const Card = ({ id, text, likes, picture }: CardProps) => {
+const Card = ({ id, text, likes, picture, index }: CardProps) => {
   return (
-    <div className="bg-[#f0f4ff] max-w-lg flex-shrink-0 p-4 rounded-2xl shadow-elevateLow flex items-center justify-between">
+    <div className= {`bg-[#f0f4ff] max-w-xl h-24 w-full min-w-lg p-4 rounded-2xl shadow-elevateLow flex items-center justify-between ${index!==0&&index%3===0?"ml-20":"ml-0"}  ${index%4===0?"mr-20":"mr-0"}`}>
       <div className="flex items-center">
         <div className="w-12 h-12 overflow-hidden rounded-full">
           <Image
