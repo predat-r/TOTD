@@ -13,7 +13,7 @@ const TopThought = ({ id, text, likes, picture }: TopThoughtProps) => {
   return (
     <div className="h-[16vh] relative flex justify-center items-center pt-2 sm:pt-4 mb-10">
       <Image
-        className="absolute top-0 rotate-[36deg] sm:rotate-[0deg]   sm:left-[12vh] md:left-[45vh] "
+        className="absolute top-0 rotate-[36deg] sm:rotate-[0deg]   sm:left-[12vh] md:left-[43vh] "
         src={"/crown.png"}
         width={50}
         height={50}
