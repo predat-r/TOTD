@@ -47,8 +47,8 @@ export const fetchThoughts = async (
 ): Promise<Thought[] | null> => {
   try {
     const thoughts: Thought[] = await prisma.thought.findMany({
-      skip: (pageNumber - 1) * 20,
-      take: 20, //number of thoughts to display per page
+      skip: (pageNumber - 1) * 6,
+      take: 6, //number of thoughts to display per page
       orderBy: {
         likeCount: "desc",
       },

@@ -1,11 +1,14 @@
+'use client'
+
 import Heading from "@/components/Heading";
 import TopThought from "@/components/TopThought";
-import React from "react";
 import CardContainer from "@/components/CardContainer";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { useState } from "react";
 
+const Homepage = () => {
+  const [queryClient] = useState(() => new QueryClient());
 
-const Homepage = async () => {
-  
   return (
     <div className="relative">
       <Heading />
@@ -15,7 +18,9 @@ const Homepage = async () => {
         likes={"1.2k"}
         picture="/placeholder.jpg"
       />
-      <CardContainer  />
+      <QueryClientProvider client={queryClient}>
+        <CardContainer />
+      </QueryClientProvider>
     </div>
   );
 };
