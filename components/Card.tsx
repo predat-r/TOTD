@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import LikeButton from "./likeButton";
+import React, { forwardRef } from 'react';
 
 type CardProps = {
   id: number;
@@ -10,9 +11,13 @@ type CardProps = {
   picture: string;
 };
 
-const Card = ({ id, text, likes, picture }: CardProps) => {
+// Wrap the Card component with React.forwardRef to pass the ref to the parent div
+const Card = forwardRef<HTMLDivElement, CardProps>(({ id, text, likes, picture }, ref) => {
   return (
-    <div className="bg-[#f0f4ff] max-w-lg flex-shrink-0 p-4 rounded-2xl shadow-elevateLow flex items-center justify-between">
+    <div
+      ref={ref} // Attach the ref to the outer div
+      className="bg-[#f0f4ff] max-w-lg flex-shrink-0 p-4 rounded-2xl shadow-elevateLow flex items-center justify-between"
+    >
       <div className="flex items-center">
         <div className="w-12 h-12 overflow-hidden rounded-full">
           <Image
@@ -28,6 +33,9 @@ const Card = ({ id, text, likes, picture }: CardProps) => {
       <LikeButton id={id} likeCount={likes}></LikeButton>
     </div>
   );
-};
+});
+
+// Add a display name for debugging purposes
+Card.displayName = 'Card';
 
 export default Card;
