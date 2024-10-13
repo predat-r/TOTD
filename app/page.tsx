@@ -1,28 +1,24 @@
-'use client'
-
 import Heading from "@/components/Heading";
 import TopThought from "@/components/TopThought";
-import CardContainer from "@/components/CardContainer";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React, { useState } from "react";
+import ClientCardContainer from "@/components/ClientCardContainer";
+import { fetchTopThought } from "./lib/data";
+import { Thought } from "@prisma/client";
+import { formatLikes } from "./lib/actions";
 
-const Homepage = () => {
-  const [queryClient] = useState(() => new QueryClient());
-
+export default async function Homepage() {
+  const topThought:Thought|null = await fetchTopThought();
+   console.log(topThought);
   return (
     <div className="relative">
       <Heading />
-      <TopThought
-        id={99}
-        text="top thought"
-        likes={"1.2k"}
-        picture="/placeholder.jpg"
-      />
-      <QueryClientProvider client={queryClient}>
-        <CardContainer />
-      </QueryClientProvider>
+      {topThought && (
+        <TopThought
+          id={topThought.thoughtId}
+          text={topThought.content}
+          likes={formatLikes(topThought.likeCount)}
+        />
+      )}
+      <ClientCardContainer />
     </div>
   );
-};
-
-export default Homepage;
+}

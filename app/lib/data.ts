@@ -15,7 +15,7 @@ export const createThought = async (
       data: {
         content: thought.content,
         authorId: thought.authorId,
-        authorUsername:thought.authorUsername
+        authorUsername: thought.authorUsername,
       },
     });
     return newThought;
@@ -139,4 +139,19 @@ export const likedByUser = async (
   });
 
   return count > 0;
+};
+
+export const fetchTopThought = async (): Promise<Thought | null> => {
+  try {
+    const topThought = await prisma.thought.findFirst({
+      where: {},
+      orderBy: {
+        likeCount: "desc",
+      },
+    });
+    return topThought;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 };
