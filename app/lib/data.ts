@@ -15,7 +15,7 @@ export const createThought = async (
       data: {
         content: thought.content,
         authorId: thought.authorId,
-        authorUsername:thought.authorUsername
+        authorUsername: thought.authorUsername,
       },
     });
     return newThought;
@@ -47,7 +47,7 @@ export const fetchThoughts = async (
 ): Promise<Thought[] | null> => {
   try {
     const thoughts: Thought[] = await prisma.thought.findMany({
-      skip: (pageNumber - 1) * 6,
+      skip: 1+ ((pageNumber - 1) * 6),
       take: 6, //number of thoughts to display per page
       orderBy: {
         likeCount: "desc",
@@ -139,4 +139,19 @@ export const likedByUser = async (
   });
 
   return count > 0;
+};
+
+export const fetchTopThought = async (): Promise<Thought | null> => {
+  try {
+    const topThought = await prisma.thought.findFirst({
+      where: {},
+      orderBy: {
+        likeCount: "desc",
+      },
+    });
+    return topThought;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 };

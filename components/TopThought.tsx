@@ -1,15 +1,15 @@
-"use client";
 import Image from "next/image";
 import LikeButton from "./likeButton";
+
 
 type TopThoughtProps = {
   id: number;
   text: string;
   likes: string;
-  picture: string;
 };
 
-const TopThought = ({ id, text, likes, picture }: TopThoughtProps) => {
+const TopThought =  ({ id, text, likes }: TopThoughtProps) => {
+
   return (
     <div className="h-[16vh] relative flex justify-center items-center pt-2 sm:pt-4 mb-10">
       <Image
@@ -23,7 +23,7 @@ const TopThought = ({ id, text, likes, picture }: TopThoughtProps) => {
         <div className="flex items-center">
           <div className="w-12 h-12 overflow-hidden rounded-full">
             <Image
-              src={picture}
+              src="/placeholder.jpg"
               alt="Profile"
               width={48}
               height={48}
