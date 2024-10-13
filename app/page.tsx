@@ -7,7 +7,6 @@ import { formatLikes } from "./lib/actions";
 
 export default async function Homepage() {
   const topThought:Thought|null = await fetchTopThought();
-   console.log(topThought);
   return (
     <div className="relative">
       <Heading />
