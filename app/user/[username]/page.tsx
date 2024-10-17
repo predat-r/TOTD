@@ -5,9 +5,13 @@ import UserProfileHeading from "@/components/UserProfileHeading";
 import ProfilePageThoughts from "@/components/profilePageThoughts";
 import UserProfileInput from "@/components/userProfileInput";
 import { UserButton } from "@clerk/nextjs";
+import { Thought } from "@prisma/client";
+import { fetchUserThoughts } from "@/app/lib/data";
+import { unstable_noStore as noStore } from "next/cache";
+const ProfilePage = async ({ params }: { params: { username: string } }) => {
 
-const ProfilePage = ({ params }: { params: { username: string } }) => {
-  const username = params.username;
+  const thoughts: Thought[] | null = await fetchUserThoughts(params.username);
+  noStore();
   return (
     <div className=" flex flex-col overflow-scroll items-center w-full h-full">
       <UserProfileHeading></UserProfileHeading>
@@ -23,10 +27,10 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
           appearance={{
             elements: {
               avatarBox: {
-                height: 150,
-                width: 150,
-              }
-            }
+                height: 300,
+                width: 250,
+              },
+            },
           }}
         />
       </div>
@@ -35,7 +39,7 @@ const ProfilePage = ({ params }: { params: { username: string } }) => {
         <h1 className="gradient-text text-5xl p-2 flex-shrink-0">
           Live Thoughts
         </h1>
-        <ProfilePageThoughts username={username} />
+        {thoughts ? <ProfilePageThoughts thoughts={thoughts} /> : null}
       </div>
     </div>
   );
