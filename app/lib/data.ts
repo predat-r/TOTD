@@ -40,6 +40,24 @@ export const deleteThought = async (thoughtId: number): Promise<boolean> => {
     return false;
   }
 };
+
+//function to delete out dated thoughts
+export const deleteOldThoughts = async (CutoffDate: number): Promise<boolean> => {
+  const dateToCompare = new Date(CutoffDate);
+  try {
+    await prisma.thought.deleteMany({
+      where: {
+        createdAt: {
+          lt: dateToCompare,
+        },
+      },
+    });
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
 //function to fetch all thoughts
 //accepts page number as input and returns 20 thoughts
 export const fetchThoughts = async (
@@ -47,7 +65,7 @@ export const fetchThoughts = async (
 ): Promise<Thought[] | null> => {
   try {
     const thoughts: Thought[] = await prisma.thought.findMany({
-      skip: 1+ ((pageNumber - 1) * 6),
+      skip: 1 + (pageNumber - 1) * 6,
       take: 6, //number of thoughts to display per page
       orderBy: {
         likeCount: "desc",

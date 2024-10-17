@@ -10,7 +10,9 @@ const ProfilePageThoughts = ({ thoughts }: { thoughts: Thought[] }) => {
   const router = useRouter();
   const DeleteThought = async (ThoughtId: number) => {
     const response = await deleteThought(ThoughtId);
-    router.refresh();
+    if (response === true) {
+      router.refresh();
+    }
   };
   console.log(thoughts);
   return (
@@ -22,10 +24,6 @@ const ProfilePageThoughts = ({ thoughts }: { thoughts: Thought[] }) => {
                 key={index}
                 className="w-[100vw] pl-10 h-full flex flex-row flex-shrink-0 items-center justify-center ml-16 gap-x-20"
               >
-                <MdOutlineDeleteOutline
-                  onClick={() => DeleteThought(element.thoughtId)}
-                  className="size-7 text-purple-900 hover:text-red-700"
-                />
                 <Card
                   index={-1}
                   key={element.thoughtId}
@@ -35,6 +33,10 @@ const ProfilePageThoughts = ({ thoughts }: { thoughts: Thought[] }) => {
                   picture="/placeholder.jpg"
                 ></Card>
                 <h1 className="gradient-text text-3xl p-2">24:09 left</h1>
+                <MdOutlineDeleteOutline
+                  onClick={() => DeleteThought(element.thoughtId)}
+                  className="size-7 text-purple-900 hover:text-red-700"
+                />
               </div>
             ))
           : null}
